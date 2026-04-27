@@ -12,7 +12,7 @@ function createBoard() {
       const isWhite = (row + col) % 2 === 0
       cell.classList.add(isWhite ? 'white' : 'black')
 
-      // пригодится дальше
+      // Rows and columns
       cell.dataset.row = row
       cell.dataset.col = col
 
@@ -22,3 +22,14 @@ function createBoard() {
 }
 
 createBoard()
+
+const initialPosition = [
+  ['br', 'bn', 'bb', 'bq', 'bk', 'bb', 'bn', 'br'],
+  ['bp', 'bp', 'bp', 'bp', 'bp', 'bp', 'bp', 'bp'],
+  [null, null, null, null, null, null, null, null],
+  [null, null, null, null, null, null, null, null],
+  [null, null, null, null, null, null, null, null],
+  [null, null, null, null, null, null, null, null],
+  ['wp', 'wp', 'wp', 'wp', 'wp', 'wp', 'wp', 'wp'],
+  ['wr', 'wn', 'wb', 'wq', 'wk', 'wb', 'wn', 'wr'],
+]
