@@ -21,8 +21,6 @@ function createBoard() {
   }
 }
 
-createBoard()
-
 const initialPosition = [
   ['br', 'bn', 'bb', 'bq', 'bk', 'bb', 'bn', 'br'],
   ['bp', 'bp', 'bp', 'bp', 'bp', 'bp', 'bp', 'bp'],
@@ -33,3 +31,22 @@ const initialPosition = [
   ['wp', 'wp', 'wp', 'wp', 'wp', 'wp', 'wp', 'wp'],
   ['wr', 'wn', 'wb', 'wq', 'wk', 'wb', 'wn', 'wr'],
 ]
+
+function renderPieces() {
+  initialPosition.forEach((row, r) => {
+    row.forEach((piece, c) => {
+      if (!piece) return
+
+      const cell = document.querySelector(`[data-row="${r}"][data-col="${c}"]`)
+
+      const img = document.createElement('img')
+      img.src = `assets/pieces/${piece}.svg`
+      img.classList.add('piece')
+
+      cell.appendChild(img)
+    })
+  })
+}
+
+createBoard()
+renderPieces()
