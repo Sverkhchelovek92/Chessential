@@ -32,7 +32,9 @@ const boardState = [
   ['wr', 'wn', 'wb', 'wq', 'wk', 'wb', 'wn', 'wr'],
 ]
 
-function renderPieces() {
+let selectedPiece = null
+
+function renderBoard() {
   const cells = document.querySelectorAll('.cell')
 
   cells.forEach((cell) => {
@@ -59,5 +61,44 @@ function renderPieces() {
   })
 }
 
+board.addEventListener('click', (e) => {
+  const cell = e.target.closest('.cell')
+
+  if (!cell) return
+
+  const row = Number(cell.dataset.row)
+  const col = Number(cell.dataset.col)
+
+  const clickedPiece = boardState[row][col]
+
+  if (selectedPiece) {
+    const { row: fromRow, col: fromCol } = selectedPiece
+
+    boardState[row][col] = boardState[fromRow][fromCol]
+    boardState[fromRow][fromCol] = null
+
+    selectedPiece = null
+
+    clearHighlights()
+    renderBoard()
+
+    return
+  }
+
+  if (clickedPiece) {
+    selectedPiece = { row, col }
+
+    clearHighlights()
+
+    cell.classList.add('selected')
+  }
+})
+
+function clearHighlights() {
+  document.querySelectorAll('.cell').forEach((cell) => {
+    cell.classList.remove('selected')
+  })
+}
+
 createBoard()
-renderPieces()
+renderBoard()
