@@ -21,7 +21,7 @@ function createBoard() {
   }
 }
 
-const initialPosition = [
+const boardState = [
   ['br', 'bn', 'bb', 'bq', 'bk', 'bb', 'bn', 'br'],
   ['bp', 'bp', 'bp', 'bp', 'bp', 'bp', 'bp', 'bp'],
   [null, null, null, null, null, null, null, null],
@@ -33,7 +33,18 @@ const initialPosition = [
 ]
 
 function renderPieces() {
-  initialPosition.forEach((row, r) => {
+  const cells = document.querySelectorAll('.cell')
+
+  cells.forEach((cell) => {
+    // deleting old pieces
+    const piece = cell.querySelector('img')
+
+    if (piece) {
+      piece.remove()
+    }
+  })
+
+  boardState.forEach((row, r) => {
     row.forEach((piece, c) => {
       if (!piece) return
 
