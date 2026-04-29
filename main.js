@@ -4,6 +4,8 @@ console.log(game.fen())
 
 // Board
 
+const letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+
 const board = document.getElementById('board')
 
 function createBoard() {
@@ -19,6 +21,20 @@ function createBoard() {
       // Rows and columns
       cell.dataset.row = row
       cell.dataset.col = col
+
+      if (row === 7) {
+        const letter = document.createElement('span')
+        letter.textContent = letters[col]
+        letter.classList.add('coord', 'letter')
+        cell.appendChild(letter)
+      }
+
+      if (col === 0) {
+        const number = document.createElement('span')
+        number.textContent = 8 - row
+        number.classList.add('coord', 'number')
+        cell.appendChild(number)
+      }
 
       board.appendChild(cell)
     }
