@@ -1,3 +1,7 @@
+const game = new Chess()
+
+console.log(game.fen())
+
 // Board
 
 const board = document.getElementById('board')
