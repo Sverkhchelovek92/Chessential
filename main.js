@@ -41,30 +41,33 @@ function createBoard() {
   }
 }
 
-const boardState = [
-  ['br', 'bn', 'bb', 'bq', 'bk', 'bb', 'bn', 'br'],
-  ['bp', 'bp', 'bp', 'bp', 'bp', 'bp', 'bp', 'bp'],
-  [null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null],
-  ['wp', 'wp', 'wp', 'wp', 'wp', 'wp', 'wp', 'wp'],
-  ['wr', 'wn', 'wb', 'wq', 'wk', 'wb', 'wn', 'wr'],
-]
+// const boardState = [
+//   ['br', 'bn', 'bb', 'bq', 'bk', 'bb', 'bn', 'br'],
+//   ['bp', 'bp', 'bp', 'bp', 'bp', 'bp', 'bp', 'bp'],
+//   [null, null, null, null, null, null, null, null],
+//   [null, null, null, null, null, null, null, null],
+//   [null, null, null, null, null, null, null, null],
+//   [null, null, null, null, null, null, null, null],
+//   ['wp', 'wp', 'wp', 'wp', 'wp', 'wp', 'wp', 'wp'],
+//   ['wr', 'wn', 'wb', 'wq', 'wk', 'wb', 'wn', 'wr'],
+// ]
 
-let selectedPiece = null
+// let selectedPiece = null
+
+let selectedSquare = null
 
 function renderBoard() {
   const cells = document.querySelectorAll('.cell')
 
   cells.forEach((cell) => {
-    // deleting old pieces
     const piece = cell.querySelector('img')
 
     if (piece) {
       piece.remove()
     }
   })
+
+  const boardState = game.board()
 
   boardState.forEach((row, r) => {
     row.forEach((piece, c) => {
@@ -73,12 +76,18 @@ function renderBoard() {
       const cell = document.querySelector(`[data-row="${r}"][data-col="${c}"]`)
 
       const img = document.createElement('img')
-      img.src = `assets/pieces/${piece}.svg`
+
+      img.src = `assets/pieces/${piece.color}${piece.type}.svg`
+
       img.classList.add('piece')
 
       cell.appendChild(img)
     })
   })
+}
+
+function toSquare(row, col) {
+  return letters[col] + (8 - row)
 }
 
 board.addEventListener('click', (e) => {
@@ -89,34 +98,66 @@ board.addEventListener('click', (e) => {
   const row = Number(cell.dataset.row)
   const col = Number(cell.dataset.col)
 
-  const clickedPiece = boardState[row][col]
+  const square = toSquare(row, col)
 
-  if (selectedPiece) {
-    const { row: fromRow, col: fromCol } = selectedPiece
-
-    boardState[row][col] = boardState[fromRow][fromCol]
-    boardState[fromRow][fromCol] = null
-
-    selectedPiece = null
+  // If piece is selected -> try to make a move
+  if (selectedSquare) {
+    const move = game.move({
+      from: selectedSquare,
+      to: square,
+      promotion: 'q',
+    })
 
     clearHighlights()
-    renderBoard()
+
+    selectedSquare = null
+
+    if (move) {
+      renderBoard()
+    }
 
     return
   }
 
-  if (clickedPiece) {
-    selectedPiece = { row, col }
+  const piece = game.get(square)
+
+  if (piece) {
+    selectedSquare = square
 
     clearHighlights()
 
     cell.classList.add('selected')
+
+    highlightMoves(square)
   }
 })
+
+function highlightMoves(square) {
+  const moves = game.moves({
+    square,
+    verbose: true,
+  })
+
+  moves.forEach((move) => {
+    const targetSquare = move.to
+
+    const file = targetSquare.charCodeAt(0) - 97
+    const rank = 8 - Number(targetSquare[1])
+
+    const cell = document.querySelector(
+      `[data-row="${rank}"][data-col="${file}"]`,
+    )
+
+    if (cell) {
+      cell.classList.add('move')
+    }
+  })
+}
 
 function clearHighlights() {
   document.querySelectorAll('.cell').forEach((cell) => {
     cell.classList.remove('selected')
+    cell.classList.remove('move')
   })
 }
 
