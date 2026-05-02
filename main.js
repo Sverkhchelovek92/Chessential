@@ -41,27 +41,6 @@ function createBoard() {
   }
 }
 
-const cells = document.querySelectorAll('.cell')
-
-cells.forEach((cell) => {
-  cell.addEventListener('dragover', (e) => {
-    e.preventDefault()
-  })
-})
-
-// const boardState = [
-//   ['br', 'bn', 'bb', 'bq', 'bk', 'bb', 'bn', 'br'],
-//   ['bp', 'bp', 'bp', 'bp', 'bp', 'bp', 'bp', 'bp'],
-//   [null, null, null, null, null, null, null, null],
-//   [null, null, null, null, null, null, null, null],
-//   [null, null, null, null, null, null, null, null],
-//   [null, null, null, null, null, null, null, null],
-//   ['wp', 'wp', 'wp', 'wp', 'wp', 'wp', 'wp', 'wp'],
-//   ['wr', 'wn', 'wb', 'wq', 'wk', 'wb', 'wn', 'wr'],
-// ]
-
-// let selectedPiece = null
-
 let selectedSquare = null
 let draggedSquare = null
 
@@ -203,3 +182,37 @@ function clearHighlights() {
 
 createBoard()
 renderBoard()
+
+const cells = document.querySelectorAll('.cell')
+
+cells.forEach((cell) => {
+  cell.addEventListener('dragover', (e) => {
+    e.preventDefault()
+  })
+
+  cell.addEventListener('drop', () => {
+    if (!draggedSquare) return
+
+    const row = Number(cell.dataset.row)
+    const col = Number(cell.dataset.col)
+
+    const targetSquare = toSquare(row, col)
+
+    const move = game.move({
+      from: draggedSquare,
+      to: targetSquare,
+      promotion: 'q',
+    })
+
+    clearHighlights()
+    selectedSquare = null
+
+    if (move) {
+      lastMove = move
+
+      renderBoard()
+    }
+
+    draggedSquare = null
+  })
+})
