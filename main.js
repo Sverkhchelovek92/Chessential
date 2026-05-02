@@ -56,6 +56,8 @@ function createBoard() {
 
 let selectedSquare = null
 
+let lastMove = null
+
 function renderBoard() {
   const cells = document.querySelectorAll('.cell')
 
@@ -68,6 +70,10 @@ function renderBoard() {
   })
 
   const boardState = game.board()
+
+  document.querySelectorAll('.cell').forEach((cell) => {
+    cell.classList.remove('last-move')
+  })
 
   boardState.forEach((row, r) => {
     row.forEach((piece, c) => {
@@ -84,6 +90,24 @@ function renderBoard() {
       cell.appendChild(img)
     })
   })
+
+  if (lastMove) {
+    highlightLastMove(lastMove.from)
+    highlightLastMove(lastMove.to)
+  }
+}
+
+function highlightLastMove(square) {
+  const file = square.charCodeAt(0) - 97
+  const rank = 8 - Number(square[1])
+
+  const cell = document.querySelector(
+    `[data-row="${rank}"][data-col="${file}"]`,
+  )
+
+  if (cell) {
+    cell.classList.add('last-move')
+  }
 }
 
 function toSquare(row, col) {
@@ -113,6 +137,8 @@ board.addEventListener('click', (e) => {
     selectedSquare = null
 
     if (move) {
+      lastMove = move
+
       renderBoard()
     }
 
