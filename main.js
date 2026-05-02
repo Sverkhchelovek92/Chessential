@@ -41,6 +41,14 @@ function createBoard() {
   }
 }
 
+const cells = document.querySelectorAll('.cell')
+
+cells.forEach((cell) => {
+  cell.addEventListener('dragover', (e) => {
+    e.preventDefault()
+  })
+})
+
 // const boardState = [
 //   ['br', 'bn', 'bb', 'bq', 'bk', 'bb', 'bn', 'br'],
 //   ['bp', 'bp', 'bp', 'bp', 'bp', 'bp', 'bp', 'bp'],
@@ -55,6 +63,7 @@ function createBoard() {
 // let selectedPiece = null
 
 let selectedSquare = null
+let draggedSquare = null
 
 let lastMove = null
 
@@ -86,6 +95,11 @@ function renderBoard() {
       img.src = `assets/pieces/${piece.color}${piece.type}.svg`
 
       img.classList.add('piece')
+      img.draggable = true
+
+      img.addEventListener('dragstart', () => {
+        draggedSquare = toSquare(r, c)
+      })
 
       cell.appendChild(img)
     })
