@@ -90,6 +90,39 @@ function renderBoard() {
   }
 }
 
+function renderHistory() {
+  const historyEl = document.getElementById('history')
+  historyEl.innerHTML = ''
+
+  const moves = game.history()
+
+  for (let i = 0; i < moves.length; i += 2) {
+    const row = document.createElement('div')
+    row.classList.add('move-row')
+
+    const moveNumber = document.createElement('span')
+    moveNumber.classList.add('move-number')
+    moveNumber.textContent = `${Math.floor(i / 2) + 1}.`
+
+    const whiteMove = document.createElement('span')
+    whiteMove.classList.add('.history-move')
+    whiteMove.textContent = moves[i]
+
+    row.appendChild(moveNumber)
+    row.appendChild(whiteMove)
+
+    if (moves[i + 1]) {
+      const blackMove = document.createElement('span')
+      blackMove.classList.add('.history-move')
+      blackMove.textContent = moves[i + 1]
+
+      row.appendChild(blackMove)
+    }
+
+    historyEl.appendChild(row)
+  }
+}
+
 function highlightLastMove(square) {
   const file = square.charCodeAt(0) - 97
   const rank = 8 - Number(square[1])
@@ -133,6 +166,7 @@ board.addEventListener('click', (e) => {
       lastMove = move
 
       renderBoard()
+      renderHistory()
     }
 
     return
@@ -211,6 +245,7 @@ cells.forEach((cell) => {
       lastMove = move
 
       renderBoard()
+      renderHistory()
     }
 
     draggedSquare = null
