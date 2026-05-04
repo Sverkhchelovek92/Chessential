@@ -123,6 +123,21 @@ function renderHistory() {
   }
 }
 
+function updateStatus() {
+  const statusEl = document.getElementById('status')
+
+  if (game.in_checkmate()) {
+    statusEl.textContent = 'Checkmate'
+  } else if (game.in_draw()) {
+    statusEl.textContent = 'Draw'
+  } else if (game.in_check()) {
+    statusEl.textContent = 'Check'
+  } else {
+    statusEl.textContent =
+      game.turn() === 'w' ? 'White to move' : 'Black to move'
+  }
+}
+
 function highlightLastMove(square) {
   const file = square.charCodeAt(0) - 97
   const rank = 8 - Number(square[1])
@@ -167,6 +182,7 @@ board.addEventListener('click', (e) => {
 
       renderBoard()
       renderHistory()
+      updateStatus()
     }
 
     return
@@ -246,6 +262,7 @@ cells.forEach((cell) => {
 
       renderBoard()
       renderHistory()
+      updateStatus()
     }
 
     draggedSquare = null
