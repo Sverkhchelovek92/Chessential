@@ -8,8 +8,31 @@ body {
 }
 
 #app {
-  margin-top: 10px;
-  text-align: center;
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+  margin-top: 40px;
+}
+
+#sidebar {
+  width: 220px;
+  background: #2a2a2a;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+#status {
+  margin-bottom: 15px;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+#history {
+  font-family: monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  max-height: 400px;
+  overflow-y: auto;
 }
 
 #board {
@@ -64,6 +87,16 @@ body {
   left: 6px;
 }
 
+.move-row {
+  display: flex;
+  gap: 10px;
+}
+
+.move-number {
+  opacity: 0.6;
+  width: 24px;
+}
+
 .move {
   position: relative;
 }
@@ -96,4 +129,12 @@ body {
 
 .piece:active {
   cursor: grabbing;
+}
+
+.history-move {
+  cursor: pointer;
+}
+
+.history-move:hover {
+  text-decoration: underline;
 }
