@@ -46,6 +46,9 @@ let draggedSquare = null
 
 let lastMove = null
 
+let historyStates = [game.fen()]
+let currentMoveIndex = 0
+
 function renderBoard() {
   const cells = document.querySelectorAll('.cell')
 
@@ -180,6 +183,11 @@ board.addEventListener('click', (e) => {
     if (move) {
       lastMove = move
 
+      historyStates = historyStates.slice(0, currentMoveIndex + 1)
+
+      historyStates.push(game.fen())
+      currentMoveIndex++
+
       renderBoard()
       renderHistory()
       updateStatus()
@@ -259,6 +267,11 @@ cells.forEach((cell) => {
 
     if (move) {
       lastMove = move
+
+      historyStates = historyStates.slice(0, currentMoveIndex + 1)
+
+      historyStates.push(game.fen())
+      currentMoveIndex++
 
       renderBoard()
       renderHistory()
