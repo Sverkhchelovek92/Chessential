@@ -231,6 +231,18 @@ function highlightMoves(square) {
   })
 }
 
+function goToMove(index) {
+  const fen = historyStates[index]
+
+  game.load(fen)
+
+  currentMoveIndex = index
+
+  renderBoard()
+  renderHistory()
+  updateStatus()
+}
+
 function clearHighlights() {
   document.querySelectorAll('.cell').forEach((cell) => {
     cell.classList.remove('selected')
