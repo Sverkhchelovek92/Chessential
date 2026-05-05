@@ -111,6 +111,12 @@ function renderHistory() {
     whiteMove.classList.add('.history-move')
     whiteMove.textContent = moves[i]
 
+    const moveIndex = i + 1
+
+    whiteMove.addEventListener('click', () => {
+      goToMove(moveIndex)
+    })
+
     row.appendChild(moveNumber)
     row.appendChild(whiteMove)
 
@@ -118,6 +124,12 @@ function renderHistory() {
       const blackMove = document.createElement('span')
       blackMove.classList.add('.history-move')
       blackMove.textContent = moves[i + 1]
+
+      const moveIndex = i + 2
+
+      blackMove.addEventListener('click', () => {
+        goToMove(moveIndex)
+      })
 
       row.appendChild(blackMove)
     }
