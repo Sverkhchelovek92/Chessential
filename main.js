@@ -142,13 +142,14 @@ function renderHistory() {
 }
 
 function updateStatus() {
+  const currentGame = isViewingHistory ? viewerGame : game
   const statusEl = document.getElementById('status')
 
-  if (game.in_checkmate()) {
+  if (currentGame.in_checkmate()) {
     statusEl.textContent = 'Checkmate'
-  } else if (game.in_draw()) {
+  } else if (currentGame.in_draw()) {
     statusEl.textContent = 'Draw'
-  } else if (game.in_check()) {
+  } else if (currentGame.in_check()) {
     statusEl.textContent = 'Check'
   } else {
     statusEl.textContent =
@@ -174,8 +175,6 @@ function toSquare(row, col) {
 }
 
 board.addEventListener('click', (e) => {
-  if (isViewingHistory) return
-
   const cell = e.target.closest('.cell')
 
   if (!cell) return
@@ -250,9 +249,7 @@ function highlightMoves(square) {
 }
 
 function goToMove(index) {
-  const fen = historyStates[index]
-
-  game.load(fen)
+  viewerGame.load(historyStates[index])
 
   currentMoveIndex = index
   isViewingHistory = true
@@ -280,8 +277,6 @@ cells.forEach((cell) => {
   })
 
   cell.addEventListener('drop', () => {
-    if (isViewingHistory) return
-
     if (!draggedSquare) return
 
     const row = Number(cell.dataset.row)
