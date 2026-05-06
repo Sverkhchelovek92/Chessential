@@ -49,6 +49,7 @@ let lastMove = null
 let historyStates = [game.fen()]
 let currentMoveIndex = 0
 
+let viewerGame = new Chess()
 let isViewingHistory = false
 
 function renderBoard() {
@@ -111,7 +112,7 @@ function renderHistory() {
     moveNumber.textContent = `${Math.floor(i / 2) + 1}.`
 
     const whiteMove = document.createElement('span')
-    whiteMove.classList.add('.history-move')
+    whiteMove.classList.add('history-move')
     whiteMove.textContent = moves[i]
 
     const moveIndex = i + 1
@@ -125,7 +126,7 @@ function renderHistory() {
 
     if (moves[i + 1]) {
       const blackMove = document.createElement('span')
-      blackMove.classList.add('.history-move')
+      blackMove.classList.add('history-move')
       blackMove.textContent = moves[i + 1]
 
       const moveIndex = i + 2
