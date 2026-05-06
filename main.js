@@ -62,7 +62,8 @@ function renderBoard() {
     }
   })
 
-  const boardState = game.board()
+  const currentGame = isViewingHistory ? viewerGame : game
+  const boardState = currentGame.board()
 
   document.querySelectorAll('.cell').forEach((cell) => {
     cell.classList.remove('last-move')
