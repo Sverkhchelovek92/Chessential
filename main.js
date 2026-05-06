@@ -49,6 +49,8 @@ let lastMove = null
 let historyStates = [game.fen()]
 let currentMoveIndex = 0
 
+let isViewingHistory = false
+
 function renderBoard() {
   const cells = document.querySelectorAll('.cell')
 
@@ -171,6 +173,8 @@ function toSquare(row, col) {
 }
 
 board.addEventListener('click', (e) => {
+  if (isViewingHistory) return
+
   const cell = e.target.closest('.cell')
 
   if (!cell) return
@@ -193,6 +197,7 @@ board.addEventListener('click', (e) => {
     selectedSquare = null
 
     if (move) {
+      isViewingHistory = false
       lastMove = move
 
       historyStates = historyStates.slice(0, currentMoveIndex + 1)
@@ -249,6 +254,7 @@ function goToMove(index) {
   game.load(fen)
 
   currentMoveIndex = index
+  isViewingHistory = true
 
   renderBoard()
   renderHistory()
@@ -273,6 +279,8 @@ cells.forEach((cell) => {
   })
 
   cell.addEventListener('drop', () => {
+    if (isViewingHistory) return
+
     if (!draggedSquare) return
 
     const row = Number(cell.dataset.row)
@@ -290,6 +298,7 @@ cells.forEach((cell) => {
     selectedSquare = null
 
     if (move) {
+      isViewingHistory = false
       lastMove = move
 
       historyStates = historyStates.slice(0, currentMoveIndex + 1)
