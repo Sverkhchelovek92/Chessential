@@ -321,3 +321,26 @@ function syncToCurrentGame() {
   renderHistory()
   updateStatus()
 }
+
+// Controls
+document.getElementById('startBtn').addEventListener('click', () => {
+  goToMove(0)
+})
+
+document.getElementById('prevBtn').addEventListener('click', () => {
+  if (currentMoveIndex > 0) {
+    goToMove(currentMoveIndex - 1)
+  }
+})
+
+document.getElementById('nextBtn').addEventListener('click', () => {
+  if (currentMoveIndex < historyStates.length - 1) {
+    goToMove(currentMoveIndex + 1)
+  }
+})
+
+document.getElementById('endBtn').addEventListener('click', () => {
+  isViewingHistory = false
+
+  syncToCurrentGame()
+})
