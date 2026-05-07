@@ -311,3 +311,13 @@ cells.forEach((cell) => {
     draggedSquare = null
   })
 })
+
+function syncToCurrentGame() {
+  viewerGame.load(game.fen())
+
+  currentMoveIndex = historyStates.length - 1
+
+  renderBoard()
+  renderHistory()
+  updateStatus()
+}
