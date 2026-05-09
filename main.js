@@ -52,6 +52,8 @@ let currentMoveIndex = 0
 let viewerGame = new Chess()
 let isViewingHistory = false
 
+const moveSound = new Audio('assets/sounds/move.wav')
+
 function renderBoard() {
   const cells = document.querySelectorAll('.cell')
 
@@ -209,6 +211,7 @@ board.addEventListener('click', (e) => {
       renderBoard()
       renderHistory()
       updateStatus()
+      playMoveSound()
     }
 
     return
@@ -306,6 +309,7 @@ cells.forEach((cell) => {
       renderBoard()
       renderHistory()
       updateStatus()
+      playMoveSound()
     }
 
     draggedSquare = null
@@ -344,3 +348,8 @@ document.getElementById('endBtn').addEventListener('click', () => {
 
   syncToCurrentGame()
 })
+
+function playMoveSound() {
+  moveSound.currentTime = 0
+  moveSound.play()
+}
