@@ -54,6 +54,11 @@ let isViewingHistory = false
 
 const moveSound = new Audio('assets/sounds/move.wav')
 
+let capturedPieces = {
+  w: [],
+  b: [],
+}
+
 function renderBoard() {
   const cells = document.querySelectorAll('.cell')
 
@@ -200,6 +205,10 @@ board.addEventListener('click', (e) => {
     selectedSquare = null
 
     if (move) {
+      if (move.captured) {
+        capturedPieces[move.color].push(move.captured)
+      }
+
       isViewingHistory = false
       lastMove = move
 
@@ -210,6 +219,7 @@ board.addEventListener('click', (e) => {
 
       renderBoard()
       renderHistory()
+      renderCapturedPieces()
       updateStatus()
       playMoveSound()
     }
@@ -298,6 +308,10 @@ cells.forEach((cell) => {
     selectedSquare = null
 
     if (move) {
+      if (move.captured) {
+        capturedPieces[move.color].push(move.captured)
+      }
+
       isViewingHistory = false
       lastMove = move
 
@@ -308,6 +322,7 @@ cells.forEach((cell) => {
 
       renderBoard()
       renderHistory()
+      renderCapturedPieces()
       updateStatus()
       playMoveSound()
     }
@@ -352,4 +367,28 @@ document.getElementById('endBtn').addEventListener('click', () => {
 function playMoveSound() {
   moveSound.currentTime = 0
   moveSound.play()
+}
+
+function renderCapturedPieces() {
+  const whiteEl = document.getElementById('whiteCaptured')
+  const blackEl = document.getElementById('blackCaptured')
+
+  whiteEl.innerHTML = ''
+  blackEl.innerHTML = ''
+
+  capturedPieces.w.forEach((piece) => {
+    const img = document.createElement('img')
+
+    img.src = `assets/pieces/b${piece}.svg`
+
+    whiteEl.appendChild(img)
+  })
+
+  capturedPieces.b.forEach((piece) => {
+    const img = document.createElement('img')
+
+    img.src = `assets/pieces/w${piece}.svg`
+
+    blackEl.appendChild(img)
+  })
 }
