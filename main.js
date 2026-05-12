@@ -222,6 +222,8 @@ board.addEventListener('click', (e) => {
       renderCapturedPieces()
       updateStatus()
       playMoveSound()
+
+      checkGameOver()
     }
 
     return
@@ -325,6 +327,8 @@ cells.forEach((cell) => {
       renderCapturedPieces()
       updateStatus()
       playMoveSound()
+
+      checkGameOver()
     }
 
     draggedSquare = null
@@ -417,3 +421,7 @@ function checkGameOver() {
     showGameOver('Draw', '50-move rule')
   }
 }
+
+document.getElementById('newGameBtn').addEventListener('click', () => {
+  location.reload()
+})
