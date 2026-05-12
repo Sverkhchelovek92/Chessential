@@ -401,3 +401,19 @@ function showGameOver(title, text) {
 
   modal.classList.remove('hidden')
 }
+
+function checkGameOver() {
+  if (game.in_checkmate()) {
+    const winner = game.turn() === 'w' ? 'Black' : 'White'
+
+    showGameOver('Checkmate', `${winner} wins`)
+  } else if (game.in_stalemate()) {
+    showGameOver('Draw', 'Stalemate')
+  } else if (game.in_threefold_repetition()) {
+    showGameOver('Draw', 'Threefold repetition')
+  } else if (game.insufficient_material()) {
+    showGameOver('Draw', 'Insufficient material')
+  } else if (game.in_draw()) {
+    showGameOver('Draw', '50-move rule')
+  }
+}
