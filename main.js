@@ -392,3 +392,12 @@ function renderCapturedPieces() {
     blackEl.appendChild(img)
   })
 }
+
+function showGameOver(title, text) {
+  const modal = document.getElementById('gameOverModal')
+
+  document.getElementById('gameOverTitle').textContent = title
+  document.getElementById('gameOverText').textContent = text
+
+  modal.classList.remove('hidden')
+}
