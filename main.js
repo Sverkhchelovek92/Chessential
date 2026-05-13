@@ -52,6 +52,8 @@ let currentMoveIndex = 0
 let viewerGame = new Chess()
 let isViewingHistory = false
 
+let gameEnded = false
+
 const moveSound = new Audio('assets/sounds/move.wav')
 
 let capturedPieces = {
@@ -183,6 +185,8 @@ function toSquare(row, col) {
 }
 
 board.addEventListener('click', (e) => {
+  if (gameEnded) return
+
   const cell = e.target.closest('.cell')
 
   if (!cell) return
@@ -288,6 +292,8 @@ renderBoard()
 const cells = document.querySelectorAll('.cell')
 
 cells.forEach((cell) => {
+  if (gameEnded) return
+
   cell.addEventListener('dragover', (e) => {
     e.preventDefault()
   })
