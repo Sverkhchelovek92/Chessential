@@ -435,3 +435,13 @@ document.getElementById('newGameBtn').addEventListener('click', () => {
 document.getElementById('reviewBtn').addEventListener('click', () => {
   document.getElementById('gameOverModal').classList.add('hidden')
 })
+
+document.getElementById('resignBtn').addEventListener('click', () => {
+  if (gameEnded) return
+
+  const winner = game.turn() === 'w' ? 'Black' : 'White'
+
+  gameEnded = true
+
+  showGameOver('Resignation', `${winner} wins`)
+})
