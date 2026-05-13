@@ -425,3 +425,7 @@ function checkGameOver() {
 document.getElementById('newGameBtn').addEventListener('click', () => {
   location.reload()
 })
+
+document.getElementById('reviewBtn').addEventListener('click', () => {
+  document.getElementById('gameOverModal').classList.add('hidden')
+})
