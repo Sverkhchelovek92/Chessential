@@ -436,6 +436,7 @@ document.getElementById('reviewBtn').addEventListener('click', () => {
   document.getElementById('gameOverModal').classList.add('hidden')
 })
 
+// Resign btn
 document.getElementById('resignBtn').addEventListener('click', () => {
   if (gameEnded) return
 
@@ -444,4 +445,17 @@ document.getElementById('resignBtn').addEventListener('click', () => {
   gameEnded = true
 
   showGameOver('Resignation', `${winner} wins`)
+})
+
+// Offer draw btn
+document.getElementById('drawBtn').addEventListener('click', () => {
+  if (gameEnded) return
+
+  const accepted = confirm('Accept draw?')
+
+  if (!accepted) return
+
+  gameEnded = true
+
+  showGameOver('Draw', 'Draw agreed')
 })
