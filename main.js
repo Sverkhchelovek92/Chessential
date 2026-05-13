@@ -414,6 +414,7 @@ function showGameOver(title, text) {
 
 function checkGameOver() {
   if (game.in_checkmate()) {
+    gameEnded = true
     const winner = game.turn() === 'w' ? 'Black' : 'White'
 
     showGameOver('Checkmate', `${winner} wins`)
