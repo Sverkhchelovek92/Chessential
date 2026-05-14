@@ -464,3 +464,13 @@ document.getElementById('drawBtn').addEventListener('click', () => {
 
   showGameOver('Draw', 'Draw agreed')
 })
+
+// PGN
+
+document.getElementById('exportPgnBtn').addEventListener('click', async () => {
+  const pgn = game.pgn()
+
+  await navigator.clipboard.writeText(pgn)
+
+  alert('PGN copied to clipboard')
+})
