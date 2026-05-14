@@ -276,3 +276,38 @@ body {
 #gameActions button:hover {
   background: #4a4a4a;
 }
+
+#pgnSection {
+  margin-top: 20px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+#pgnSection textarea {
+  resize: vertical;
+
+  min-height: 100px;
+
+  padding: 10px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: #1f1f1f;
+  color: white;
+}
+
+#pgnSection button {
+  padding: 10px;
+
+  border: none;
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  background: #3a3a3a;
+  color: white;
+}

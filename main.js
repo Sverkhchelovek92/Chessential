@@ -419,12 +419,16 @@ function checkGameOver() {
 
     showGameOver('Checkmate', `${winner} wins`)
   } else if (game.in_stalemate()) {
+    gameEnded = true
     showGameOver('Draw', 'Stalemate')
   } else if (game.in_threefold_repetition()) {
+    gameEnded = true
     showGameOver('Draw', 'Threefold repetition')
   } else if (game.insufficient_material()) {
+    gameEnded = true
     showGameOver('Draw', 'Insufficient material')
   } else if (game.in_draw()) {
+    gameEnded = true
     showGameOver('Draw', '50-move rule')
   }
 }
