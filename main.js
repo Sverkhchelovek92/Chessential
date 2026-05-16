@@ -478,9 +478,9 @@ document.getElementById('exportPgnBtn').addEventListener('click', async () => {
 document.getElementById('importPgnBtn').addEventListener('click', () => {
   const pgnInput = document.getElementById('pgnInput')
 
-  const success = game.loadPgn(pgnInput.value)
-
-  if (!success) {
+  try {
+    game.load_pgn(pgnInput.value)
+  } catch (error) {
     alert('Invalid PGN')
 
     return
@@ -500,7 +500,13 @@ document.getElementById('importPgnBtn').addEventListener('click', () => {
 
   isViewingHistory = false
 
+  capturedPieces = {
+    w: [],
+    b: [],
+  }
+
   renderBoard()
   renderHistory()
+  renderCapturedPieces()
   updateStatus()
 })
