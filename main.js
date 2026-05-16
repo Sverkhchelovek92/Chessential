@@ -474,3 +474,33 @@ document.getElementById('exportPgnBtn').addEventListener('click', async () => {
 
   alert('PGN copied to clipboard')
 })
+
+document.getElementById('importPgnBtn').addEventListener('click', () => {
+  const pgnInput = document.getElementById('pgnInput')
+
+  const success = game.loadPgn(pgnInput.value)
+
+  if (!success) {
+    alert('Invalid PGN')
+
+    return
+  }
+
+  historyStates = [new Chess().fen()]
+
+  const tempGame = new Chess()
+
+  game.history().forEach((move) => {
+    tempGame.move(move)
+
+    historyStates.push(tempGame.fen())
+  })
+
+  currentMoveIndex = historyStates.length - 1
+
+  isViewingHistory = false
+
+  renderBoard()
+  renderHistory()
+  updateStatus()
+})
