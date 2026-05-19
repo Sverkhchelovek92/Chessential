@@ -198,10 +198,22 @@ board.addEventListener('click', (e) => {
 
   // If piece is selected -> try to make a move
   if (selectedSquare) {
+    let promotion = 'q'
+
+    const piece = game.get(selectedSquare)
+
+    if (
+      piece &&
+      piece.type === 'p' &&
+      (square[1] === '8' || square[1] === '1')
+    ) {
+      promotion = getPromotionPiece()
+    }
+
     const move = game.move({
       from: selectedSquare,
       to: square,
-      promotion: 'q',
+      promotion,
     })
 
     clearHighlights()
@@ -306,10 +318,22 @@ cells.forEach((cell) => {
 
     const targetSquare = toSquare(row, col)
 
+    let promotion = 'q'
+
+    const piece = game.get(draggedSquare)
+
+    if (
+      piece &&
+      piece.type === 'p' &&
+      (targetSquare[1] === '8' || targetSquare[1] === '1')
+    ) {
+      promotion = getPromotionPiece()
+    }
+
     const move = game.move({
       from: draggedSquare,
       to: targetSquare,
-      promotion: 'q',
+      promotion,
     })
 
     clearHighlights()
