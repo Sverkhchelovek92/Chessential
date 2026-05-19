@@ -514,3 +514,16 @@ document.getElementById('importPgnBtn').addEventListener('click', () => {
   renderCapturedPieces()
   updateStatus()
 })
+
+// Promotions
+
+function getPromotionPiece() {
+  const choice = prompt(
+    'Promote to: q (queen), r (rook), b (bishop), n (knight)',
+    'q',
+  )
+
+  const validPieces = ['q', 'r', 'b', 'n']
+
+  return validPieces.includes(choice) ? choice : 'q'
+}
