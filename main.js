@@ -490,20 +490,24 @@ document.getElementById('importPgnBtn').addEventListener('click', () => {
 
   const tempGame = new Chess()
 
-  game.history().forEach((move) => {
+  capturedPieces = {
+    w: [],
+    b: [],
+  }
+
+  game.history({ verbose: true }).forEach((move) => {
     tempGame.move(move)
 
     historyStates.push(tempGame.fen())
+
+    if (move.captured) {
+      capturedPieces[move.color].push(move.captured)
+    }
   })
 
   currentMoveIndex = historyStates.length - 1
 
   isViewingHistory = false
-
-  capturedPieces = {
-    w: [],
-    b: [],
-  }
 
   renderBoard()
   renderHistory()
