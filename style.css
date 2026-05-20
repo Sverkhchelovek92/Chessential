@@ -311,3 +311,51 @@ body {
   background: #3a3a3a;
   color: white;
 }
+
+#promotionModal {
+  position: fixed;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.6);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 2000;
+}
+
+#promotionContent {
+  background: #2a2a2a;
+
+  padding: 20px;
+
+  border-radius: 16px;
+
+  text-align: center;
+}
+
+#promotionChoices {
+  display: flex;
+
+  gap: 10px;
+
+  margin-top: 15px;
+}
+
+.promotion-piece {
+  width: 64px;
+  height: 64px;
+
+  padding: 8px;
+
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.promotion-piece:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
