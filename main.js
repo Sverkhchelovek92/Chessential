@@ -427,6 +427,7 @@ function renderCapturedPieces() {
   })
 }
 
+// Game Over
 function showGameOver(title, text) {
   const modal = document.getElementById('gameOverModal')
 
@@ -550,4 +551,33 @@ function getPromotionPiece() {
   const validPieces = ['q', 'r', 'b', 'n']
 
   return validPieces.includes(choice) ? choice : 'q'
+}
+
+function showPromotionModal(color) {
+  return new Promise((resolve) => {
+    const modal = document.getElementById('promotionModal')
+    const container = document.getElementById('promotionChoices')
+
+    container.innerHTML = ''
+
+    const pieces = ['q', 'r', 'b', 'n']
+
+    pieces.forEach((piece) => {
+      const img = document.createElement('img')
+
+      img.src = `assets/pieces/${color}${piece}.svg`
+
+      img.classList.add('promotion-piece')
+
+      img.addEventListener('click', () => {
+        modal.classList.add('hidden')
+
+        resolve(piece)
+      })
+
+      container.appendChild(img)
+    })
+
+    modal.classList.remove('hidden')
+  })
 }
