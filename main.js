@@ -184,7 +184,7 @@ function toSquare(row, col) {
   return letters[col] + (8 - row)
 }
 
-board.addEventListener('click', (e) => {
+board.addEventListener('click', async (e) => {
   if (gameEnded) return
 
   const cell = e.target.closest('.cell')
@@ -207,7 +207,7 @@ board.addEventListener('click', (e) => {
       piece.type === 'p' &&
       (square[1] === '8' || square[1] === '1')
     ) {
-      promotion = getPromotionPiece()
+      promotion = await showPromotionModal(piece.color)
     }
 
     const move = game.move({
@@ -310,7 +310,7 @@ cells.forEach((cell) => {
     e.preventDefault()
   })
 
-  cell.addEventListener('drop', () => {
+  cell.addEventListener('drop', async () => {
     if (!draggedSquare) return
 
     const row = Number(cell.dataset.row)
@@ -327,7 +327,7 @@ cells.forEach((cell) => {
       piece.type === 'p' &&
       (targetSquare[1] === '8' || targetSquare[1] === '1')
     ) {
-      promotion = getPromotionPiece()
+      promotion = await showPromotionModal(piece.color)
     }
 
     const move = game.move({
@@ -541,17 +541,6 @@ document.getElementById('importPgnBtn').addEventListener('click', () => {
 })
 
 // Promotions
-
-function getPromotionPiece() {
-  const choice = prompt(
-    'Promote to: q (queen), r (rook), b (bishop), n (knight)',
-    'q',
-  )
-
-  const validPieces = ['q', 'r', 'b', 'n']
-
-  return validPieces.includes(choice) ? choice : 'q'
-}
 
 function showPromotionModal(color) {
   return new Promise((resolve) => {
