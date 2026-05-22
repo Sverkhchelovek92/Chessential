@@ -68,6 +68,47 @@
         <div id="promotionChoices"></div>
       </div>
     </div>
+    <div id="settingsModal" class="hidden">
+      <div id="settingsContent">
+        <h2>Settings</h2>
+
+        <div class="setting">
+          <label for="themeSelect">Theme</label>
+
+          <select id="themeSelect">
+            <option value="classic">Classic</option>
+            <option value="wood">Wood</option>
+            <option value="neon">Neon</option>
+          </select>
+        </div>
+
+        <div class="setting">
+          <label>
+            <input type="checkbox" id="soundToggle" checked />
+
+            Sound
+          </label>
+        </div>
+
+        <div class="setting">
+          <label>
+            <input type="checkbox" id="flipToggle" />
+
+            Flip Board
+          </label>
+        </div>
+
+        <div class="setting">
+          <label>
+            <input type="checkbox" id="coordsToggle" checked />
+
+            Coordinates
+          </label>
+        </div>
+
+        <button id="closeSettingsBtn">Close</button>
+      </div>
+    </div>
     <script src="libs/chess.js"></script>
     <script src="main.js"></script>
   </body>
