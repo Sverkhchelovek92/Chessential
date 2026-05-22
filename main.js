@@ -570,3 +570,15 @@ function showPromotionModal(color) {
     modal.classList.remove('hidden')
   })
 }
+
+// Settings
+
+const settingsModal = document.getElementById('settingsModal')
+
+document.getElementById('openSettingsBtn').addEventListener('click', () => {
+  settingsModal.classList.remove('hidden')
+})
+
+document.getElementById('closeSettingsBtn').addEventListener('click', () => {
+  settingsModal.classList.add('hidden')
+})
