@@ -359,3 +359,19 @@ body {
 .promotion-piece:hover {
   background: rgba(255, 255, 255, 0.1);
 }
+
+#openSettingsBtn {
+  width: 100%;
+
+  margin-top: 20px;
+
+  padding: 10px;
+
+  border: none;
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  background: #3a3a3a;
+  color: white;
+}
