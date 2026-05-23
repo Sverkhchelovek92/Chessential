@@ -444,3 +444,19 @@ body {
   background: #3a3a3a;
   color: white;
 }
+
+body.wood .white {
+  background: #f0d9b5;
+}
+
+body.wood .black {
+  background: #b58863;
+}
+
+body.neon .white {
+  background: #00bcd4;
+}
+
+body.neon .black {
+  background: #006064;
+}

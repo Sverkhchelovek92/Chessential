@@ -586,6 +586,14 @@ document.getElementById('closeSettingsBtn').addEventListener('click', () => {
   settingsModal.classList.add('hidden')
 })
 
+// Sound Toggle
+
 document.getElementById('soundToggle').addEventListener('change', (e) => {
   soundEnabled = e.target.checked
+})
+
+// Themes
+
+document.getElementById('themeSelect').addEventListener('change', (e) => {
+  document.body.className = e.target.value
 })
