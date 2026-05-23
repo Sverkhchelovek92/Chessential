@@ -54,6 +54,8 @@ let isViewingHistory = false
 
 let gameEnded = false
 
+let soundEnabled = true
+
 const moveSound = new Audio('assets/sounds/move.wav')
 
 let capturedPieces = {
@@ -399,6 +401,7 @@ document.getElementById('endBtn').addEventListener('click', () => {
 })
 
 function playMoveSound() {
+  if (!soundEnabled) return
   moveSound.currentTime = 0
   moveSound.play()
 }
@@ -581,4 +584,8 @@ document.getElementById('openSettingsBtn').addEventListener('click', () => {
 
 document.getElementById('closeSettingsBtn').addEventListener('click', () => {
   settingsModal.classList.add('hidden')
+})
+
+document.getElementById('soundToggle').addEventListener('change', (e) => {
+  soundEnabled = e.target.checked
 })
